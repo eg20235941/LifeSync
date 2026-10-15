@@ -18,3 +18,4 @@ dist/
 
 # Editor and OS files
 .DS_Store
+git
