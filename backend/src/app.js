@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.get("/api/health", (req, res) => {
     message: "LifeSync API is running",
   });
 });
+
+// Authentication API routes
+app.use("/api/auth", authRoutes);
 
 // Handle unknown API routes
 app.use((req, res) => {
