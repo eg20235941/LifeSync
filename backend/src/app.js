@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./routes/authRoutes.js";
+import expenseRoutes from "./routes/expenseRoutes.js";
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.get("/api/health", (req, res) => {
 
 // Authentication API routes
 app.use("/api/auth", authRoutes);
+
+// Expense Tracker API routes
+app.use("/api/expenses", expenseRoutes);
 
 // Handle unknown API routes
 app.use((req, res) => {
