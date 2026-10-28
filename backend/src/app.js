@@ -5,6 +5,7 @@ import helmet from "helmet";
 import authRoutes from "./routes/authRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
+import academicRoutes from "./routes/academicRoutes.js";
 
 const app = express();
 
@@ -36,6 +37,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
 app.use("/api/tasks", taskRoutes);
+
+app.use("/api/academic", academicRoutes);
 
 // Handle unknown API routes
 app.use((req, res) => {

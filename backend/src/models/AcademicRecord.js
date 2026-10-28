@@ -1,7 +1,6 @@
 
 import mongoose from "mongoose";
 
-// Define the Academic Record schema
 const academicRecordSchema = new mongoose.Schema(
   {
     user: {
@@ -35,18 +34,26 @@ const academicRecordSchema = new mongoose.Schema(
         "A+", "A", "A-",
         "B+", "B", "B-",
         "C+", "C", "C-",
-        "D+", "D", "D-",
-        "E", "F", "I", "W", "P",
+        "E",
+        "MC", "AC", "WH",
+        "PASS-H", "PASS-M", "PASS-S", "FAIL-E",
       ],
       uppercase: true,
       default: null,
     },
 
+    // GPA modules use the standard 4.0 grading scale.
+    // Non-GPA modules (e.g. Industrial Training) do not.
+    countsForGPA: {
+      type: Boolean,
+      default: true,
+    },
+
     semester: {
       type: Number,
       required: [true, "Semester is required"],
-      min: 1,
-      max: 3,
+      min: [1, "Semester must be at least 1"],
+      max: [8, "Semester cannot exceed 8"],
     },
 
     academicYear: {
@@ -63,7 +70,46 @@ const academicRecordSchema = new mongoose.Schema(
   }
 );
 
-// Avoid duplicate module records within the same term
+
+const GPA_GRADES = [
+  "A+", "A", "A-",
+  "B+", "B", "B-",
+  "C+", "C", "C-",
+  "E",
+];
+
+const NON_GPA_GRADES = [
+  "PASS-H",
+  "PASS-M",
+  "PASS-S",
+  "FAIL-E",
+];
+
+const SPECIAL_GRADES = ["MC", "AC", "WH"];
+
+// Validate grade compatibility with module type.
+academicRecordSchema.pre("validate", function () {
+  if (this.grade == null) {
+    return;
+  }
+
+  const allowedGrades = this.countsForGPA
+    ? GPA_GRADES
+    : NON_GPA_GRADES;
+
+  if (
+    !allowedGrades.includes(this.grade) &&
+    !SPECIAL_GRADES.includes(this.grade)
+  ) {
+    this.invalidate(
+      "grade",
+      `Grade ${this.grade} is not valid for this module type`
+    );
+  }
+});
+
+
+// Prevent duplicate modules for the same student and term.
 academicRecordSchema.index(
   {
     user: 1,
