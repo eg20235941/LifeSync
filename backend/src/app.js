@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./routes/authRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
 
@@ -33,6 +34,8 @@ app.use("/api/auth", authRoutes);
 
 // Expense Tracker API routes
 app.use("/api/expenses", expenseRoutes);
+
+app.use("/api/tasks", taskRoutes);
 
 // Handle unknown API routes
 app.use((req, res) => {
