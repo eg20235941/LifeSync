@@ -1,6 +1,6 @@
 
 import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/authContext.js'
 
 function Dashboard() {
@@ -39,6 +39,12 @@ function Dashboard() {
         >
           Logout
         </button>
+        <div className="dashboard-user-info">
+  <h2>LifeSync Modules</h2>
+  <p>
+    <Link to="/expenses">Expense Tracker</Link>
+  </p>
+</div>
       </section>
     </main>
   )
