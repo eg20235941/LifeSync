@@ -49,6 +49,8 @@ function Dashboard() {
   <p>
     <Link to="/tasks">Task Manager</Link>
   </p>
+  <p><Link to="/academic">Academic Hub</Link></p>
+  
 </div>
       </section>
     </main>

@@ -518,3 +518,254 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+/* Academic Hub */
+
+.academic-overview {
+  margin-top: 24px;
+  text-align: left;
+}
+
+.academic-overview h2 {
+  margin: 24px 0 14px;
+  color: #1e293b;
+}
+
+.academic-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.academic-summary-card {
+  min-width: 0;
+  padding: 18px 12px;
+  border: 1px solid #dbe4f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.academic-summary-card h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.academic-summary-card strong {
+  font-size: 24px;
+  color: #1d4ed8;
+}
+
+.academic-semester-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.academic-semester-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.academic-semester-item strong {
+  color: #1d4ed8;
+}
+
+.academic-notice {
+  padding: 12px;
+  margin-top: 14px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1e40af;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .academic-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Academic Module Form */
+
+.academic-form-card {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid #dbe4f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: left;
+}
+
+.academic-form-card h2 {
+  margin: 0 0 18px;
+  color: #1e293b;
+}
+
+.academic-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 14px;
+  color: #334155;
+}
+
+.academic-checkbox-label input {
+  width: auto;
+  margin: 0;
+  accent-color: #2563eb;
+}
+
+.academic-form-card select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font: inherit;
+}
+
+
+/* Academic Records Table */
+
+.academic-records-section {
+  margin-top: 32px;
+  text-align: left;
+}
+
+.academic-records-section h2 {
+  margin-bottom: 18px;
+  color: #1e293b;
+}
+
+.academic-semester-group {
+  margin-bottom: 24px;
+  border: 1px solid #dbe4f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.academic-records-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #eff6ff;
+}
+
+.academic-records-header h3 {
+  margin: 0;
+  color: #1e40af;
+  font-size: 16px;
+}
+
+.academic-records-header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.academic-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.academic-records-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.academic-records-table th,
+.academic-records-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.academic-records-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.academic-records-table td {
+  color: #334155;
+}
+
+.academic-records-table td strong {
+  display: block;
+  color: #1e293b;
+}
+
+.academic-records-table td small {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+}
+
+.academic-records-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.academic-grade {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+/* Academic Record Actions */
+
+.academic-record-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.academic-record-actions button,
+.academic-cancel-button {
+  padding: 8px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.academic-record-actions .academic-delete-button {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.academic-record-actions button:disabled,
+.academic-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.academic-cancel-button {
+  margin-top: 10px;
+}

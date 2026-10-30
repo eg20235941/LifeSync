@@ -13,6 +13,7 @@ import ProtectedRoute from './routes/ProtectedRoute'
 import './App.css'
 import Expenses from './pages/Expenses'
 import Tasks from './pages/Tasks'
+import Academic from './pages/Academic'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
        <Route element={<ProtectedRoute />}>
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/expenses" element={<Expenses />} />
+  <Route path="/academic" element={<Academic />} />
 </Route>
     <Route element={<ProtectedRoute />}>
   <Route path="/dashboard" element={<Dashboard />} />
