@@ -12,6 +12,7 @@ import Register from './pages/Register'
 import ProtectedRoute from './routes/ProtectedRoute'
 import './App.css'
 import Expenses from './pages/Expenses'
+import Tasks from './pages/Tasks'
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
        <Route element={<ProtectedRoute />}>
   <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/expenses" element={<Expenses />} />
+</Route>
+    <Route element={<ProtectedRoute />}>
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/expenses" element={<Expenses />} />
+  <Route path="/tasks" element={<Tasks />} />
 </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />

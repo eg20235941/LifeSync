@@ -41,8 +41,13 @@ function Dashboard() {
         </button>
         <div className="dashboard-user-info">
   <h2>LifeSync Modules</h2>
+
   <p>
     <Link to="/expenses">Expense Tracker</Link>
+  </p>
+
+  <p>
+    <Link to="/tasks">Task Manager</Link>
   </p>
 </div>
       </section>
