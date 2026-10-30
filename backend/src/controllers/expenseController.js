@@ -139,6 +139,18 @@ export const updateExpense = async (req, res) => {
       });
     }
 
+    // Check whether the request body is valid
+    if (
+      !req.body ||
+      typeof req.body !== "object" ||
+      Array.isArray(req.body)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid request body",
+      });
+    }
+
     // Allow only these fields to be updated
     const allowedFields = [
       "type",

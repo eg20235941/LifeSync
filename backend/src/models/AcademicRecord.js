@@ -50,20 +50,41 @@ const academicRecordSchema = new mongoose.Schema(
     },
 
     semester: {
-      type: Number,
-      required: [true, "Semester is required"],
-      min: [1, "Semester must be at least 1"],
-      max: [8, "Semester cannot exceed 8"],
+  type: Number,
+  required: [true, "Semester is required"],
+  min: [1, "Semester must be at least 1"],
+  max: [8, "Semester cannot exceed 8"],
+  validate: {
+    validator: function (value) {
+      return Number.isInteger(value);
     },
+    message: "Semester must be a whole number",
+  },
+},
 
     academicYear: {
-      type: String,
-      required: [true, "Academic year is required"],
-      match: [
-        /^\d{4}\/\d{4}$/,
-        "Academic year must be in YYYY/YYYY format",
-      ],
+  type: String,
+  required: [true, "Academic year is required"],
+  trim: true,
+  match: [
+    /^\d{4}\/\d{4}$/,
+    "Academic year must be in YYYY/YYYY format",
+  ],
+  validate: {
+    validator: function (value) {
+      if (typeof value !== "string") return false;
+
+      const years = value.split("/");
+      if (years.length !== 2) return false;
+
+      const startYear = Number(years[0]);
+      const endYear = Number(years[1]);
+
+      return endYear === startYear + 1;
     },
+    message: "Academic year must contain consecutive years",
+  },
+},
   },
   {
     timestamps: true,

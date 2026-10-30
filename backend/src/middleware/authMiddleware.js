@@ -24,7 +24,7 @@ export const protect = async (req, res, next) => {
     );
 
     // Find the user associated with the token
-    const user = await User.findById(decoded.userId);
+const user = await User.findById(decoded.userId).select("-password");
 
     if (!user) {
       return res.status(401).json({

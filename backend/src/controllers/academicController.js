@@ -156,6 +156,18 @@ export const updateAcademicRecord = async (req, res) => {
       });
     }
 
+    // Check whether the request body is valid
+    if (
+      !req.body ||
+      typeof req.body !== "object" ||
+      Array.isArray(req.body)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid request body",
+      });
+    }
+
     const allowedFields = [
       "moduleCode",
       "moduleName",

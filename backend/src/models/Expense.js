@@ -23,11 +23,20 @@ const expenseSchema = new mongoose.Schema(
     },
 
     category: {
-      type: String,
-      required: [true, "Category is required"],
-      trim: true,
-      maxlength: 50,
+  type: String,
+  required: [true, "Category is required"],
+  trim: true,
+  maxlength: 50,
+  validate: {
+    validator: function (value) {
+      return (
+        typeof value === "string" &&
+        value.trim().length > 0
+      );
     },
+    message: "Category cannot be empty",
+  },
+},
 
     description: {
       type: String,

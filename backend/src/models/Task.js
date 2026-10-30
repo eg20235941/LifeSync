@@ -11,12 +11,20 @@ const taskSchema = new mongoose.Schema(
     },
 
     title: {
-      type: String,
-      required: [true, "Task title is required"],
-      trim: true,
-      maxlength: 150,
+  type: String,
+  required: [true, "Task title is required"],
+  trim: true,
+  maxlength: 150,
+  validate: {
+    validator: function (value) {
+      return (
+        typeof value === "string" &&
+        value.trim().length > 0
+      );
     },
-
+    message: "Task title cannot be empty",
+  },
+},
     description: {
       type: String,
       trim: true,
