@@ -1,0 +1,499 @@
+/* =========================================
+   LIFESYNC DASHBOARD
+========================================= */
+
+.dashboard-page {
+  width: 100%;
+  color: #172554;
+}
+
+/* Dashboard heading */
+
+.dashboard-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.dashboard-heading h1 {
+  margin: 0 0 7px;
+  color: #172554;
+  font-size: 27px;
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+
+.welcome-wave {
+  font-size: 23px;
+}
+
+.dashboard-heading p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.dashboard-tag {
+  padding: 11px 15px;
+  border-radius: 9px;
+  color: #2563eb;
+  background: #eaf2ff;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Summary cards */
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  min-height: 108px;
+  padding: 19px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+}
+
+.stat-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 11px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.income-icon {
+  color: #0f9f79;
+  background: #e2f5ef;
+}
+
+.expense-icon {
+  color: #ef5350;
+  background: #fff0ef;
+}
+
+.task-icon {
+  color: #2563eb;
+  background: #eaf1ff;
+}
+
+.gpa-icon {
+  color: #8b5cf6;
+  background: #f1eaff;
+}
+
+.dashboard-stat-card > div:last-child {
+  min-width: 0;
+}
+
+.dashboard-stat-card p {
+  margin: 0 0 7px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.dashboard-stat-card h2 {
+  overflow-wrap: anywhere;
+  margin: 0 0 5px;
+  color: #172554;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.dashboard-stat-card span {
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+/* Overview panels */
+
+.dashboard-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.95fr);
+  gap: 18px;
+}
+
+.dashboard-panel {
+  min-width: 0;
+  min-height: 285px;
+  padding: 22px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-heading h2 {
+  margin: 0 0 4px;
+  color: #172554;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.panel-heading p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+/* Expense chart */
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chart-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.legend-income {
+  background: #2eb68d;
+}
+
+.legend-expense {
+  background: #6595ed;
+}
+
+.expense-chart {
+  height: 190px;
+  margin-top: 18px;
+  border-bottom: 1px solid #e2e8f0;
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(100% - 1px),
+    #edf1f6 calc(100% - 1px)
+  );
+  background-size: 100% 25%;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  height: 100%;
+  gap: 10px;
+}
+
+.chart-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  height: calc(100% - 23px);
+}
+
+.chart-bar {
+  width: min(25%, 16px);
+  min-height: 0;
+  border-radius: 5px 5px 0 0;
+  transition: height 0.3s ease;
+}
+
+.income-bar {
+  background: #32b88e;
+}
+
+.expense-bar {
+  background: #6796ef;
+}
+
+.chart-month > span {
+  padding-top: 9px;
+  color: #718096;
+  font-size: 10px;
+}
+
+/* Task progress */
+
+.task-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 27px;
+}
+
+.progress-item {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-item > span {
+  color: #334155;
+  font-size: 12px;
+}
+
+.progress-item > strong {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.progress-track {
+  overflow: hidden;
+  height: 9px;
+  border-radius: 20px;
+  background: #edf1f6;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.todo-fill {
+  background: #3478df;
+}
+
+.in-progress-fill {
+  background: #df9632;
+}
+
+.done-fill {
+  background: #169f79;
+}
+
+/* Quick links */
+
+.dashboard-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 23px;
+}
+
+.dashboard-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #3478e5;
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.dashboard-quick-links a:hover {
+  color: #ffffff;
+  background: #1d5fc5;
+  text-decoration: none;
+}
+
+/* Loading and error messages */
+
+.dashboard-message {
+  padding: 40px 20px;
+  border: 1px solid #e1e8f2;
+  border-radius: 12px;
+  color: #64748b;
+  background: #ffffff;
+  text-align: center;
+}
+
+.dashboard-error {
+  color: #dc2626;
+  background: #fff7f7;
+}
+
+/* Responsive design */
+
+@media (max-width: 1150px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-heading h1 {
+    font-size: 23px;
+  }
+
+  .dashboard-tag {
+    font-size: 11px;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-stat-card {
+    min-height: 95px;
+  }
+
+  .dashboard-panel {
+    padding: 17px;
+  }
+
+  .panel-heading {
+    flex-direction: column;
+  }
+
+  .chart-legend {
+    margin-top: 5px;
+  }
+
+  .progress-item {
+    grid-template-columns: 75px minmax(0, 1fr) 18px;
+    gap: 8px;
+  }
+}
+
+/* =========================================
+   DASHBOARD - READABILITY IMPROVEMENTS
+========================================= */
+
+/* Page heading */
+.dashboard-heading h1 {
+  font-size: 30px;
+  font-weight: 750;
+}
+
+.dashboard-heading p {
+  font-size: 15px;
+}
+
+/* Summary cards */
+.dashboard-stat-card {
+  min-height: 116px;
+  padding: 21px;
+  border-color: #d5dfed;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.055);
+}
+
+.dashboard-stat-card p {
+  font-size: 14px;
+  color: #475569;
+}
+
+.dashboard-stat-card h2 {
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.dashboard-stat-card span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Overview panels */
+.dashboard-panel {
+  padding: 25px;
+  border-color: #d5dfed;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.055);
+}
+
+.panel-heading h2 {
+  font-size: 18px;
+}
+
+.panel-heading p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Chart legend and labels */
+.chart-legend {
+  font-size: 12px;
+  color: #475569;
+}
+
+.chart-month > span {
+  font-size: 12px;
+  color: #475569;
+}
+
+/* Task progress */
+.progress-item > span {
+  font-size: 14px;
+  color: #334155;
+}
+
+.progress-item > strong {
+  font-size: 13px;
+  color: #334155;
+}
+
+.progress-track {
+  height: 10px;
+}
+
+/* Quick links */
+.dashboard-quick-links a {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+/* Responsive heading */
+@media (max-width: 600px) {
+  .dashboard-heading h1 {
+    font-size: 25px;
+  }
+
+  .dashboard-stat-card h2 {
+    font-size: 20px;
+  }
+
+  .dashboard-panel {
+    padding: 19px;
+  }
+}

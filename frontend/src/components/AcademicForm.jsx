@@ -144,6 +144,7 @@ function AcademicForm({
           required
         >
           <option value="">Select semester</option>
+
           {Array.from({ length: 8 }, (_, index) => (
             <option key={index + 1} value={index + 1}>
               Semester {index + 1}
@@ -173,27 +174,31 @@ function AcademicForm({
           Counts towards GPA
         </label>
 
-        <label htmlFor="module-grade">Grade</label>
-        <select
-          id="module-grade"
-          name="grade"
-          value={formData.grade}
-          onChange={handleChange}
-        >
-          <option value="">Not assigned yet</option>
+        {/* Grade label and dropdown grouped together */}
+        <div className="academic-grade-field">
+          <label htmlFor="module-grade">Grade</label>
 
-          {gradeOptions.map((grade) => (
-            <option key={grade} value={grade}>
-              {grade}
-            </option>
-          ))}
+          <select
+            id="module-grade"
+            name="grade"
+            value={formData.grade}
+            onChange={handleChange}
+          >
+            <option value="">Not assigned yet</option>
 
-          {SPECIAL_GRADES.map((grade) => (
-            <option key={grade} value={grade}>
-              {grade}
-            </option>
-          ))}
-        </select>
+            {gradeOptions.map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+
+            {SPECIAL_GRADES.map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {error && (
           <p role="alert" className="auth-error">

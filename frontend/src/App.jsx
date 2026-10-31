@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Routes,
@@ -10,10 +9,12 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ProtectedRoute from './routes/ProtectedRoute'
-import './App.css'
+import AppLayout from './components/AppLayout'
 import Expenses from './pages/Expenses'
 import Tasks from './pages/Tasks'
 import Academic from './pages/Academic'
+
+import './App.css'
 
 function App() {
   return (
@@ -24,16 +25,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-       <Route element={<ProtectedRoute />}>
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/expenses" element={<Expenses />} />
-  <Route path="/academic" element={<Academic />} />
-</Route>
-    <Route element={<ProtectedRoute />}>
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/expenses" element={<Expenses />} />
-  <Route path="/tasks" element={<Tasks />} />
-</Route>
+        <Route element={<ProtectedRoute />}>
+          <Route element={<AppLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/academic" element={<Academic />} />
+          </Route>
+        </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

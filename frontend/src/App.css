@@ -769,3 +769,74 @@
 .academic-cancel-button {
   margin-top: 10px;
 }
+
+/* =========================================
+   LIFESYNC - GLOBAL READABILITY IMPROVEMENTS
+========================================= */
+
+/* Main content spacing */
+.page-content {
+  padding: 38px 40px;
+}
+
+/* Sidebar */
+.sidebar-brand {
+  font-size: 25px;
+}
+
+.sidebar-label {
+  font-size: 11px;
+  color: #b6c5dc;
+}
+
+.sidebar-link {
+  min-height: 48px;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.sidebar-bottom p {
+  font-size: 13px;
+  color: #b6c5dc;
+}
+
+.sidebar-logout {
+  font-size: 15px;
+}
+
+/* Top bar */
+.topbar {
+  min-height: 78px;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.breadcrumb strong {
+  color: #172554;
+  font-weight: 700;
+}
+
+.user-details strong {
+  font-size: 14px;
+}
+
+.user-details span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Responsive spacing */
+@media (max-width: 900px) {
+  .page-content {
+    padding: 30px 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-content {
+    padding: 24px 16px;
+  }
+}

@@ -1,23 +1,20 @@
-
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { getExpenses, deleteExpense } from '../api/expenseApi'
 import ExpenseForm from '../components/ExpenseForm'
+import './Expenses.css'
 
-const formatCurrency = (amount) => {
-  return `Rs. ${Number(amount).toLocaleString('en-LK', {
+const formatCurrency = (amount) =>
+  `LKR ${Number(amount || 0).toLocaleString('en-LK', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`
-}
 
-const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('en-LK', {
+const formatDate = (date) =>
+  new Date(date).toLocaleDateString('en-LK', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   })
-}
 
 function Expenses() {
   const [expenses, setExpenses] = useState([])
@@ -55,6 +52,7 @@ function Expenses() {
         item._id === updatedExpense._id ? updatedExpense : item
       )
     )
+
     setEditingExpense(null)
   }
 
@@ -90,96 +88,188 @@ function Expenses() {
 
   const totalIncome = expenses
     .filter((item) => item.type === 'income')
-    .reduce((total, item) => total + item.amount, 0)
+    .reduce((total, item) => total + Number(item.amount || 0), 0)
 
   const totalExpenses = expenses
     .filter((item) => item.type === 'expense')
-    .reduce((total, item) => total + item.amount, 0)
+    .reduce((total, item) => total + Number(item.amount || 0), 0)
 
   const balance = totalIncome - totalExpenses
 
   return (
-    <main className="app-container">
-      <section className="welcome-card">
-        <div className="app-name">LIFESYNC</div>
+    <div className="expenses-page">
+      {/* Page heading */}
 
-        <h1>Expense Tracker</h1>
-        <p>Manage your income and expenses in LKR.</p>
+      <section className="expenses-heading">
+        <div>
+          <h1>Expense Tracker</h1>
+          <p>Keep track of your income and spending.</p>
+        </div>
 
-        {loading && <p>Loading transactions...</p>}
+        <div className="expenses-heading-tag">
+          ◈ &nbsp; Personal Finance
+        </div>
+      </section>
 
-        {error && (
-          <p role="alert" className="auth-error">{error}</p>
-        )}
+      {loading && (
+        <div className="expenses-message">
+          Loading your transactions...
+        </div>
+      )}
 
-        {!loading && !error && (
-          <>
-            <div className="expense-summary">
-              <div className="summary-card">
-                <h3>Total Income</h3>
-                <p className="income-text">
-                  {formatCurrency(totalIncome)}
-                </p>
+      {error && (
+        <div role="alert" className="expenses-message expenses-error">
+          {error}
+        </div>
+      )}
+
+      {!loading && !error && (
+        <>
+          {/* Financial summary */}
+
+          <section className="expenses-summary">
+            <div className="expenses-summary-card">
+              <div className="expenses-summary-icon income-summary-icon">
+                ↗
               </div>
 
-              <div className="summary-card">
-                <h3>Total Expenses</h3>
-                <p className="expense-text">
-                  {formatCurrency(totalExpenses)}
-                </p>
-              </div>
-
-              <div className="summary-card">
-                <h3>Current Balance</h3>
-                <p className={
-                  balance < 0 ? 'expense-text' : 'income-text'
-                }>
-                  {formatCurrency(balance)}
-                </p>
+              <div>
+                <p>Total Income</p>
+                <h2>{formatCurrency(totalIncome)}</h2>
+                <span>All recorded income</span>
               </div>
             </div>
 
-            <ExpenseForm
-              key={editingExpense?._id || 'new'}
-              expenseToEdit={editingExpense}
-              onExpenseAdded={handleExpenseAdded}
-              onExpenseUpdated={handleExpenseUpdated}
-              onCancelEdit={() => setEditingExpense(null)}
-            />
+            <div className="expenses-summary-card">
+              <div className="expenses-summary-icon expense-summary-icon">
+                ↘
+              </div>
 
-            <div className="transaction-section">
-              <h2>Transaction History</h2>
-              <p>{expenses.length} transaction(s)</p>
+              <div>
+                <p>Total Expenses</p>
+                <h2>{formatCurrency(totalExpenses)}</h2>
+                <span>All recorded expenses</span>
+              </div>
+            </div>
+
+            <div className="expenses-summary-card">
+              <div className="expenses-summary-icon balance-summary-icon">
+                ⇄
+              </div>
+
+              <div>
+                <p>Current Balance</p>
+                <h2 className={balance < 0 ? 'negative-balance' : ''}>
+                  {formatCurrency(balance)}
+                </h2>
+                <span>Income minus expenses</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Form and transaction history */}
+
+          <section className="expenses-content">
+            <div className="expenses-form-panel">
+              <div className="expenses-section-heading">
+                <h2>
+                  {editingExpense
+                    ? 'Edit Transaction'
+                    : 'Add a Transaction'}
+                </h2>
+
+                <p>
+                  {editingExpense
+                    ? 'Update your transaction details.'
+                    : 'Record your income or expenses.'}
+                </p>
+              </div>
+
+              <ExpenseForm
+                key={editingExpense?._id || 'new'}
+                expenseToEdit={editingExpense}
+                onExpenseAdded={handleExpenseAdded}
+                onExpenseUpdated={handleExpenseUpdated}
+                onCancelEdit={() => setEditingExpense(null)}
+              />
+            </div>
+
+            <div className="expenses-history-panel">
+              <div className="expenses-section-heading history-heading">
+                <div>
+                  <h2>Transaction History</h2>
+                  <p>Review your recorded transactions.</p>
+                </div>
+
+                <span className="transaction-count">
+                  {expenses.length} transaction(s)
+                </span>
+              </div>
 
               {actionError && (
-                <p role="alert" className="auth-error">
+                <p role="alert" className="expenses-action-error">
                   {actionError}
                 </p>
               )}
 
               {expenses.length === 0 ? (
-                <p>No transactions found.</p>
+                <div className="expenses-empty-state">
+                  <div className="empty-state-icon">◈</div>
+                  <h3>No transactions yet</h3>
+                  <p>
+                    Add your first income or expense using the form.
+                  </p>
+                </div>
               ) : (
-                <div className="transaction-list">
+                <div className="expenses-transaction-list">
                   {expenses.map((item) => (
                     <div
-                      className="transaction-item"
+                      className="expenses-transaction-item"
                       key={item._id}
                     >
-                      <div>
-                        <h3>{item.category}</h3>
-                        <p>
-                          {item.description || 'No description'}
-                        </p>
-                        <small>{formatDate(item.date)}</small>
+                      <div className="transaction-main">
+                        <div
+                          className={`transaction-type-icon ${
+                            item.type === 'income'
+                              ? 'transaction-income-icon'
+                              : 'transaction-expense-icon'
+                          }`}
+                        >
+                          {item.type === 'income' ? '↗' : '↘'}
+                        </div>
+
+                        <div className="transaction-details">
+                          <h3>{item.category}</h3>
+
+                          <p>
+                            {item.description || 'No description'}
+                          </p>
+
+                          <div className="transaction-meta">
+                            <span>{formatDate(item.date)}</span>
+                            <span
+                              className={`transaction-type-label ${
+                                item.type === 'income'
+                                  ? 'income-label'
+                                  : 'expense-label'
+                              }`}
+                            >
+                              {item.type === 'income'
+                                ? 'Income'
+                                : 'Expense'}
+                            </span>
+                          </div>
+                        </div>
                       </div>
 
-                      <div className="transaction-actions">
-                        <strong className={
-                          item.type === 'income'
-                            ? 'income-text'
-                            : 'expense-text'
-                        }>
+                      <div className="transaction-right">
+                        <strong
+                          className={
+                            item.type === 'income'
+                              ? 'income-text'
+                              : 'expense-text'
+                          }
+                        >
                           {item.type === 'income' ? '+' : '-'}
                           {formatCurrency(item.amount)}
                         </strong>
@@ -187,6 +277,7 @@ function Expenses() {
                         <div className="transaction-buttons">
                           <button
                             type="button"
+                            className="transaction-edit-button"
                             onClick={() => {
                               setActionError('')
                               setEditingExpense(item)
@@ -197,7 +288,7 @@ function Expenses() {
 
                           <button
                             type="button"
-                            className="delete-button"
+                            className="transaction-delete-button"
                             onClick={() => handleDelete(item)}
                             disabled={deletingId === item._id}
                           >
@@ -212,14 +303,10 @@ function Expenses() {
                 </div>
               )}
             </div>
-          </>
-        )}
-
-        <p className="auth-footer">
-          <Link to="/dashboard">Back to Dashboard</Link>
-        </p>
-      </section>
-    </main>
+          </section>
+        </>
+      )}
+    </div>
   )
 }
 

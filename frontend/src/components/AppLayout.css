@@ -1,0 +1,284 @@
+/* =========================================
+   LIFESYNC - MAIN APPLICATION LAYOUT
+========================================= */
+
+.app-layout {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+/* Sidebar */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 100vh;
+  padding: 28px 18px 20px;
+  color: #e2e8f0;
+  background: #172554;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 10px;
+  margin-bottom: 48px;
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: #ffffff;
+  background: #3b82f6;
+  font-size: 21px;
+}
+
+.sidebar-label {
+  padding: 0 12px;
+  margin: 0 0 13px;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 46px;
+  padding: 0 13px;
+  border-radius: 9px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link:hover {
+  color: #ffffff;
+  background: #263b6b;
+  text-decoration: none;
+}
+
+.sidebar-link.active {
+  color: #ffffff;
+  background: #2563eb;
+  font-weight: 650;
+}
+
+.sidebar-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 21px;
+  font-size: 19px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 16px 10px 0;
+  border-top: 1px solid #33446c;
+}
+
+.sidebar-bottom p {
+  margin: 0 0 17px;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #fecaca;
+  background: transparent;
+  font-size: 14px;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.sidebar-logout:hover {
+  background: #3b2d4a;
+}
+
+.sidebar-logout span {
+  font-size: 18px;
+}
+
+/* Main content */
+
+.main-layout {
+  min-height: 100vh;
+  margin-left: 250px;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  padding: 0 38px;
+  border-bottom: 1px solid #e8edf4;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.breadcrumb {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.breadcrumb strong {
+  color: #172554;
+  font-weight: 650;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.user-avatar {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  color: #1d4ed8;
+  background: #dbeafe;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.user-details strong {
+  color: #172554;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.user-details span {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1500px;
+  padding: 34px 38px;
+  margin: 0 auto;
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #172554;
+  background: #ffffff;
+  font-size: 20px;
+}
+
+/* Mobile sidebar overlay */
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: block;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .main-layout {
+    margin-left: 0;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    place-items: center;
+  }
+
+  .topbar {
+    padding: 0 22px;
+  }
+
+  .page-content {
+    padding: 28px 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    min-height: 66px;
+    padding: 0 15px;
+  }
+
+  .page-content {
+    padding: 22px 15px;
+  }
+
+  .user-details span {
+    display: none;
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+  }
+}

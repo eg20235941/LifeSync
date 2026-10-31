@@ -1,0 +1,623 @@
+/* =========================================
+   LIFESYNC EXPENSES PAGE
+========================================= */
+
+.expenses-page {
+  width: 100%;
+  color: #172554;
+}
+
+/* Page heading */
+
+.expenses-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.expenses-heading h1 {
+  margin: 0 0 7px;
+  color: #172554;
+  font-size: 27px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.expenses-heading p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.expenses-heading-tag {
+  padding: 11px 15px;
+  border-radius: 9px;
+  color: #2563eb;
+  background: #eaf2ff;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Summary cards */
+
+.expenses-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.expenses-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  min-height: 108px;
+  padding: 19px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+}
+
+.expenses-summary-card > div:last-child {
+  min-width: 0;
+}
+
+.expenses-summary-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 11px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.income-summary-icon {
+  color: #0f9f79;
+  background: #e2f5ef;
+}
+
+.expense-summary-icon {
+  color: #ef5350;
+  background: #fff0ef;
+}
+
+.balance-summary-icon {
+  color: #2563eb;
+  background: #eaf1ff;
+}
+
+.expenses-summary-card p {
+  margin: 0 0 7px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.expenses-summary-card h2 {
+  overflow-wrap: anywhere;
+  margin: 0 0 5px;
+  color: #172554;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.expenses-summary-card span {
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.negative-balance {
+  color: #dc2626 !important;
+}
+
+/* Main content layout */
+
+.expenses-content {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.5fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.expenses-form-panel,
+.expenses-history-panel {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+}
+
+.expenses-section-heading {
+  margin-bottom: 20px;
+}
+
+.expenses-section-heading h2 {
+  margin: 0 0 5px;
+  color: #172554;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.expenses-section-heading p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+/* Expense form - override legacy form styles */
+
+.expenses-form-panel .expense-form-card {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.expenses-form-panel .expense-form-card h2 {
+  display: none;
+}
+
+.expenses-form-panel .auth-form {
+  gap: 9px;
+}
+
+.expenses-form-panel .auth-form label {
+  margin-top: 5px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.expenses-form-panel .auth-form input,
+.expenses-form-panel .auth-form select,
+.expenses-form-panel .auth-form textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 11px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  outline: none;
+  color: #172554;
+  background: #ffffff;
+  font-size: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.expenses-form-panel .auth-form textarea {
+  resize: vertical;
+}
+
+.expenses-form-panel .auth-form input:focus,
+.expenses-form-panel .auth-form select:focus,
+.expenses-form-panel .auth-form textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.expenses-form-panel .auth-form .auth-button {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 9px;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #3478e5;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.expenses-form-panel .auth-form .auth-button:hover {
+  background: #1d5fc5;
+}
+
+.expenses-form-panel .auth-form .auth-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.expenses-form-panel .expense-cancel-button {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 2px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  color: #475569;
+  background: #ffffff;
+  font-size: 12px;
+}
+
+/* Transaction history */
+
+.history-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.transaction-count {
+  padding: 6px 9px;
+  border-radius: 7px;
+  color: #2563eb;
+  background: #eaf2ff;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.expenses-transaction-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.expenses-transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.expenses-transaction-item:first-child {
+  padding-top: 5px;
+}
+
+.expenses-transaction-item:last-child {
+  padding-bottom: 5px;
+  border-bottom: none;
+}
+
+.transaction-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.transaction-type-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 10px;
+  font-size: 19px;
+}
+
+.transaction-income-icon {
+  color: #0f9f79;
+  background: #e2f5ef;
+}
+
+.transaction-expense-icon {
+  color: #ef5350;
+  background: #fff0ef;
+}
+
+.transaction-details {
+  min-width: 0;
+}
+
+.transaction-details h3 {
+  overflow-wrap: anywhere;
+  margin: 0 0 4px;
+  color: #172554;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.transaction-details p {
+  overflow-wrap: anywhere;
+  margin: 0 0 6px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.transaction-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.transaction-meta > span:first-child {
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.transaction-type-label {
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.income-label {
+  color: #0f9f79;
+  background: #e2f5ef;
+}
+
+.expense-label {
+  color: #dc5555;
+  background: #fff0ef;
+}
+
+.transaction-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.transaction-right > strong {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.income-text {
+  color: #0f9f79;
+}
+
+.expense-text {
+  color: #e05252;
+}
+
+.transaction-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.transaction-buttons button {
+  padding: 5px 9px;
+  border: 1px solid #dbe3ef;
+  border-radius: 6px;
+  color: #475569;
+  background: #ffffff;
+  font-size: 10px;
+  transition: background 0.2s ease;
+}
+
+.transaction-edit-button:hover {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.transaction-buttons .transaction-delete-button {
+  border-color: #fee2e2;
+  color: #dc2626;
+}
+
+.transaction-buttons .transaction-delete-button:hover {
+  background: #fff1f2;
+}
+
+.transaction-buttons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Empty state */
+
+.expenses-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 15px;
+  text-align: center;
+}
+
+.empty-state-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 13px;
+  border-radius: 14px;
+  color: #2563eb;
+  background: #eaf2ff;
+  font-size: 24px;
+}
+
+.expenses-empty-state h3 {
+  margin: 0 0 7px;
+  color: #172554;
+  font-size: 14px;
+}
+
+.expenses-empty-state p {
+  max-width: 250px;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* Messages */
+
+.expenses-message {
+  padding: 35px 20px;
+  border: 1px solid #e1e8f2;
+  border-radius: 12px;
+  color: #64748b;
+  background: #ffffff;
+  text-align: center;
+}
+
+.expenses-error,
+.expenses-action-error {
+  color: #dc2626;
+}
+
+.expenses-error {
+  background: #fff7f7;
+}
+
+.expenses-action-error {
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+/* Responsive */
+
+@media (max-width: 1050px) {
+  .expenses-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .expenses-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .expenses-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .expenses-heading h1 {
+    font-size: 23px;
+  }
+
+  .expenses-form-panel,
+  .expenses-history-panel {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expenses-transaction-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .transaction-right {
+    align-items: flex-start;
+    padding-left: 51px;
+  }
+
+  .history-heading {
+    flex-direction: column;
+  }
+}
+
+/* =========================================
+   EXPENSES - READABILITY IMPROVEMENTS
+========================================= */
+
+.expenses-heading h1 {
+  font-size: 30px;
+}
+
+.expenses-heading p {
+  font-size: 15px;
+}
+
+.expenses-summary-card {
+  min-height: 116px;
+  padding: 21px;
+  border-color: #d5dfed;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.055);
+}
+
+.expenses-summary-card p {
+  font-size: 14px;
+  color: #475569;
+}
+
+.expenses-summary-card h2 {
+  font-size: 21px;
+}
+
+.expenses-summary-card span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.expenses-form-panel,
+.expenses-history-panel {
+  padding: 25px;
+  border-color: #d5dfed;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.055);
+}
+
+.expenses-section-heading h2 {
+  font-size: 18px;
+}
+
+.expenses-section-heading p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Form labels and fields */
+
+.expenses-form-panel .auth-form label {
+  font-size: 14px;
+  color: #334155;
+}
+
+.expenses-form-panel .auth-form input,
+.expenses-form-panel .auth-form select,
+.expenses-form-panel .auth-form textarea {
+  min-height: 44px;
+  font-size: 14px;
+  border-color: #cbd5e1;
+}
+
+.expenses-form-panel .auth-form .auth-button {
+  min-height: 46px;
+  font-size: 14px;
+}
+
+/* Transaction history */
+
+.transaction-details h3 {
+  font-size: 15px;
+}
+
+.transaction-details p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.transaction-meta > span:first-child {
+  font-size: 12px;
+}
+
+.transaction-type-label {
+  font-size: 11px;
+}
+
+.transaction-right > strong {
+  font-size: 15px;
+}
+
+.transaction-buttons button {
+  padding: 7px 11px;
+  font-size: 12px;
+}
+
+.transaction-count {
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .expenses-heading h1 {
+    font-size: 25px;
+  }
+
+  .expenses-form-panel,
+  .expenses-history-panel {
+    padding: 19px;
+  }
+}

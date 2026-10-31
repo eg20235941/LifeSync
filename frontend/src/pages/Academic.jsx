@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
   getAcademicRecords,
   getAcademicGPA,
@@ -8,6 +7,7 @@ import {
 } from '../api/academicApi'
 import AcademicForm from '../components/AcademicForm'
 import AcademicRecordsTable from '../components/AcademicRecordsTable'
+import './Academic.css'
 
 
 function Academic() {
@@ -108,121 +108,136 @@ const handleDelete = async (record) => {
 }
 
   return (
-    <main className="app-container">
-      <section className="welcome-card">
-        <div className="app-name">LIFESYNC</div>
+    <div className="academic-page">
 
-        <h1>Academic Hub</h1>
-        <p>
-          Manage your academic modules, grades and GPA.
-        </p>
+      {/* Page heading */}
 
-        {loading && <p>Loading academic information...</p>}
-
-        {error && (
-          <p role="alert" className="auth-error">
-            {error}
+      <section className="academic-page-heading">
+        <div>
+          <h1>Academic Hub</h1>
+          <p>
+            Track your modules, monitor your grades and manage your GPA.
           </p>
-        )}
+        </div>
 
-        {!loading && !error && (
-          <div className="academic-overview">
-            <h2>Academic Overview</h2>
+        <div className="academic-heading-tag">
+          ✦ &nbsp; Academic Workspace
+        </div>
+      </section>
 
+      {loading && (
+        <p>Loading academic information...</p>
+      )}
 
-            <div className="academic-summary-grid">
-              <div className="academic-summary-card">
-                <h3>Total Modules</h3>
-                <strong>{records.length}</strong>
-              </div>
+      {error && (
+        <p role="alert" className="auth-error">
+          {error}
+        </p>
+      )}
 
-              <div className="academic-summary-card">
-                <h3>CGPA</h3>
-                <strong>
-                  {gpaData?.cgpa == null
-                    ? 'N/A'
-                    : Number(gpaData.cgpa).toFixed(2)}
-                </strong>
-              </div>
+      {!loading && !error && (
+        <div className="academic-overview">
 
-              <div className="academic-summary-card">
-                <h3>Semesters</h3>
-                <strong>
-                  {gpaData?.semesters?.length ?? 0}
-                </strong>
-              </div>
+          {/* Academic summary */}
+
+          <h2>Academic Overview</h2>
+
+          <div className="academic-summary-grid">
+
+            <div className="academic-summary-card">
+              <h3>Total Modules</h3>
+              <strong>{records.length}</strong>
             </div>
 
-            {gpaData?.provisional && (
-              <p className="academic-notice">
-                GPA is provisional because some grades
-                have not been entered.
-              </p>
-            )}
+            <div className="academic-summary-card">
+              <h3>Overall CGPA</h3>
+              <strong>
+                {gpaData?.cgpa == null
+                  ? 'N/A'
+                  : Number(gpaData.cgpa).toFixed(2)}
+              </strong>
+            </div>
 
-            {gpaData?.cgpa == null && records.length > 0 && (
-              <p className="academic-notice">
-                CGPA is not currently available.
-                Check pending or special grades.
-              </p>
-            )}
+            <div className="academic-summary-card">
+              <h3>Semesters</h3>
+              <strong>
+                {gpaData?.semesters?.length ?? 0}
+              </strong>
+            </div>
 
-            <h2>Semester GPA</h2>
-
-            {gpaData?.semesters?.length ? (
-              <div className="academic-semester-list">
-                {gpaData.semesters.map((item) => (
-                  <div
-                    className="academic-semester-item"
-                    key={item.semester}
-                  >
-                    <span>Semester {item.semester}</span>
-                    <strong>
-                      {item.sgpa == null
-                        ? 'N/A'
-                        : Number(item.sgpa).toFixed(2)}
-                    </strong>
-                  </div>
-                ))}
-              </div>
-                        ) : (
-              <p>No academic records available yet.</p>
-            )}
-
-            {actionError && (
-              <p role="alert" className="auth-error">
-                {actionError}
-              </p>
-            )}
-
-            <AcademicRecordsTable
-              records={records}
-              semesters={gpaData?.semesters || []}
-              onEdit={(record) => {
-                setActionError('')
-                setEditingRecord(record)
-              }}
-              onDelete={handleDelete}
-              busyRecordId={busyRecordId}
-            />
-
-            <AcademicForm
-              key={editingRecord?._id || 'new'}
-              recordToEdit={editingRecord}
-              onRecordAdded={handleRecordAdded}
-              onRecordUpdated={handleRecordUpdated}
-              onCancelEdit={() => setEditingRecord(null)}
-            />
           </div>
-        )}
 
-        <p className="auth-footer">
-          <Link to="/dashboard">
-            Back to Dashboard
-          </Link>
-        </p>
-      </section>
-    </main>
+          {gpaData?.provisional && (
+            <p className="academic-notice">
+              GPA is provisional because some grades
+              have not been entered.
+            </p>
+          )}
+
+          {gpaData?.cgpa == null && records.length > 0 && (
+            <p className="academic-notice">
+              CGPA is not currently available.
+              Check pending or special grades.
+            </p>
+          )}
+
+          {/* Semester GPA */}
+
+          <h2>Semester GPA</h2>
+
+          {gpaData?.semesters?.length ? (
+            <div className="academic-semester-list">
+              {gpaData.semesters.map((item) => (
+                <div
+                  className="academic-semester-item"
+                  key={item.semester}
+                >
+                  <span>Semester {item.semester}</span>
+
+                  <strong>
+                    {item.sgpa == null
+                      ? 'N/A'
+                      : Number(item.sgpa).toFixed(2)}
+                  </strong>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No academic records available yet.</p>
+          )}
+
+          {actionError && (
+            <p role="alert" className="auth-error">
+              {actionError}
+            </p>
+          )}
+
+          {/* Academic records */}
+
+          <AcademicRecordsTable
+            records={records}
+            semesters={gpaData?.semesters || []}
+            onEdit={(record) => {
+              setActionError('')
+              setEditingRecord(record)
+            }}
+            onDelete={handleDelete}
+            busyRecordId={busyRecordId}
+          />
+
+          {/* Add or edit module */}
+
+          <AcademicForm
+            key={editingRecord?._id || 'new'}
+            recordToEdit={editingRecord}
+            onRecordAdded={handleRecordAdded}
+            onRecordUpdated={handleRecordUpdated}
+            onCancelEdit={() => setEditingRecord(null)}
+          />
+
+        </div>
+      )}
+    </div>
   )
 }
 

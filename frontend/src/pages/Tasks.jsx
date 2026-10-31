@@ -1,6 +1,4 @@
-
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
   getTasks,
   deleteTask,
@@ -8,6 +6,7 @@ import {
 } from '../api/taskApi'
 import TaskForm from '../components/TaskForm'
 import KanbanBoard from '../components/KanbanBoard'
+import './Tasks.css'
 
 function Tasks() {
   const [tasks, setTasks] = useState([])
@@ -45,6 +44,7 @@ function Tasks() {
         task._id === updatedTask._id ? updatedTask : task
       )
     )
+
     setEditingTask(null)
   }
 
@@ -116,27 +116,98 @@ function Tasks() {
   ).length
 
   return (
-    <main className="app-container">
-      <section className="welcome-card">
-        <div className="app-name">LIFESYNC</div>
+    <div className="tasks-page">
 
-        <h1>Task Manager</h1>
-        <p>Organize your tasks using a Kanban board.</p>
+      {/* Page heading */}
 
-        {loading && <p>Loading tasks...</p>}
+      <section className="tasks-heading">
+        <div>
+          <h1>Task Manager</h1>
+          <p>Plan your work, stay focused, and get things done.</p>
+        </div>
 
-        {error && (
-          <p role="alert" className="auth-error">{error}</p>
-        )}
+        <div className="tasks-heading-tag">
+          ☷ &nbsp; My Tasks
+        </div>
+      </section>
 
-        {!loading && !error && (
-          <>
-            <div className="task-overview">
-              <h2>Task Overview</h2>
-              <p>Total Tasks: {tasks.length}</p>
-              <p>To Do: {todoCount}</p>
-              <p>In Progress: {inProgressCount}</p>
-              <p>Done: {doneCount}</p>
+      {loading && (
+        <div className="tasks-message">
+          Loading your tasks...
+        </div>
+      )}
+
+      {error && (
+        <div role="alert" className="tasks-message tasks-error">
+          {error}
+        </div>
+      )}
+
+      {!loading && !error && (
+        <>
+          {/* Task summary */}
+
+          <section className="tasks-summary">
+
+            <div className="tasks-summary-card">
+              <div className="tasks-summary-icon total-tasks-icon">
+                ☷
+              </div>
+              <div>
+                <p>Total Tasks</p>
+                <h2>{tasks.length}</h2>
+                <span>All your tasks</span>
+              </div>
+            </div>
+
+            <div className="tasks-summary-card">
+              <div className="tasks-summary-icon todo-tasks-icon">
+                ○
+              </div>
+              <div>
+                <p>To Do</p>
+                <h2>{todoCount}</h2>
+                <span>Waiting to start</span>
+              </div>
+            </div>
+
+            <div className="tasks-summary-card">
+              <div className="tasks-summary-icon progress-tasks-icon">
+                ◷
+              </div>
+              <div>
+                <p>In Progress</p>
+                <h2>{inProgressCount}</h2>
+                <span>Currently working</span>
+              </div>
+            </div>
+
+            <div className="tasks-summary-card">
+              <div className="tasks-summary-icon done-tasks-icon">
+                ✓
+              </div>
+              <div>
+                <p>Completed</p>
+                <h2>{doneCount}</h2>
+                <span>Successfully finished</span>
+              </div>
+            </div>
+
+          </section>
+
+          {/* Create or edit task */}
+
+          <section className="tasks-form-panel">
+            <div className="tasks-section-heading">
+              <h2>
+                {editingTask ? 'Edit Task' : 'Create a Task'}
+              </h2>
+
+              <p>
+                {editingTask
+                  ? 'Update your task details.'
+                  : 'Add a new task to your workspace.'}
+              </p>
             </div>
 
             <TaskForm
@@ -146,31 +217,33 @@ function Tasks() {
               onTaskUpdated={handleTaskUpdated}
               onCancelEdit={() => setEditingTask(null)}
             />
+          </section>
 
-            {actionError && (
-              <p role="alert" className="auth-error">
-                {actionError}
-              </p>
-            )}
+          {/* Kanban board */}
 
-            <KanbanBoard
-              tasks={tasks}
-              onEdit={(task) => {
-                setActionError('')
-                setEditingTask(task)
-              }}
-              onDelete={handleDelete}
-              onMove={handleMove}
-              busyTaskId={busyTaskId}
-            />
-          </>
-        )}
+          {actionError && (
+            <p role="alert" className="tasks-action-error">
+              {actionError}
+            </p>
+          )}
 
-        <p className="auth-footer">
-          <Link to="/dashboard">Back to Dashboard</Link>
-        </p>
-      </section>
-    </main>
+          <KanbanBoard
+            tasks={tasks}
+            onEdit={(task) => {
+              setActionError('')
+              setEditingTask(task)
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              })
+            }}
+            onDelete={handleDelete}
+            onMove={handleMove}
+            busyTaskId={busyTaskId}
+          />
+        </>
+      )}
+    </div>
   )
 }
 
